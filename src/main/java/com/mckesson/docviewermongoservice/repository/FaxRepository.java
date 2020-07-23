@@ -4,5 +4,5 @@ import com.mckesson.docviewermongoservice.model.FaxDB;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface FaxRepository extends MongoRepository<FaxDB, Integer> {
+public interface FaxRepository extends MongoRepository<FaxDB, String> {
 }
