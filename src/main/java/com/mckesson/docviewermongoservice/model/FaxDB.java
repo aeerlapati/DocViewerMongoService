@@ -6,13 +6,13 @@ import javax.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "FaxDB")
+@Document(collection = "DMS_QUEUE")
 public class FaxDB {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String id;
-	private String queue_id;
     private String document_id;
+	private String queue_id;
+   // private String document_id;
     private String group_id;
     private String case_id;
     private String queue_status;
