@@ -6,13 +6,13 @@ import javax.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "FaxDB")
+@Document(collection = "DMS_QUEUE")
 public class FaxDB {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String id;
-	private String queue_id;
     private String document_id;
+	private String queue_id;
+   // private String document_id;
     private String group_id;
     private String case_id;
     private String queue_status;
@@ -22,7 +22,9 @@ public class FaxDB {
     private String assigned_user_lname;
     private String document_type;
     private String incoming_fax_number;
-    private String group_status;
+	private String group_status;
+	private String program_name;
+	private String program_id;
     
     
 	public String getDocument_id() {
@@ -96,6 +98,18 @@ public class FaxDB {
 	}
 	public void setGroup_status(String group_status) {
 		this.group_status = group_status;
+	}
+	public String getProgram_name() {
+		return program_name;
+	}
+	public void setProgram_name(String program_name) {
+		this.program_name = program_name;
+	}
+	public String getProgram_id() {
+		return program_id;
+	}
+	public void setProgram_id(String program_id) {
+		this.program_id = program_id;
 	}
  
 }
