@@ -79,6 +79,16 @@ public class CrudServiceTest {
         //Mockito.when(faxService.saveOrUpdate(Mockito.any(FaxDB.class))).thenReturn(faxDB);
         mockMvc.perform(post("/addRecords").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(sampleJson)).andDo(print()).andExpect(status().isCreated());
     }
+    
+    @Test
+    public void testGetRecordsByUsername() throws Exception {
+    	List<FaxDB> retval = new ArrayList<FaxDB>();
+    	try {
+            mockMvc.perform(get("/getRecordsByUsername").param("username", "!@#$%^&*()(*&^%")).andExpect(status().isNotFound());
+        }catch(Exception e) {
+        	logger.error(e.getMessage());
+        }
+    }
      
     private void createAddTaskMap(){
     	  faxDB.setAssigned_user_fname("Robert");
