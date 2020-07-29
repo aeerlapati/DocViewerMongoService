@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mckesson.docviewermongoservice.exception.InvalidInputException;
@@ -83,6 +84,36 @@ public class WelcomeController {
 		}
 	}
 
+	@GetMapping("/getRecordsByUsername")
+	public ResponseEntity<List<FaxDB>> getRecordByUname(@RequestParam("username") String username) {
+		logger.error("Inside getRecordsByUsername Service" + username);
+		List<FaxDB> returnVal = new ArrayList<FaxDB>();
+		if(!isEmptyOrNull.checkValue(username)) {
+			faxDB.setAssigned_username(username);
+			faxDB.setCreatedDate(null);
+
+			try {
+				returnVal = faxService.getDataByExample(faxDB);
+
+				if(returnVal != null && returnVal.size() > 0) {
+					logger.info(returnVal.get(0).toString());
+					return new ResponseEntity<>(returnVal, HttpStatus.FOUND);
+				}else {
+					return new ResponseEntity<>(returnVal, HttpStatus.NOT_FOUND);
+				}
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+				logger.info(e.getMessage());
+				logger.info(e.getStackTrace().toString());
+
+				return new ResponseEntity<>(returnVal, HttpStatus.EXPECTATION_FAILED); 
+			}
+
+		}else {
+			return new ResponseEntity<>(returnVal, HttpStatus.BAD_REQUEST);
+		}
+
+	}
 
 
 	private FaxDB setFaxData(AddRecordsRequest faxRequest) throws IOException {
