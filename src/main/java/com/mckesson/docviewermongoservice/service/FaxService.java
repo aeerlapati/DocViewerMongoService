@@ -17,5 +17,9 @@ public interface FaxService {
     FaxDB saveOrUpdate(FaxDB faxDB);
 
     void delete(FaxDB faxDB);
+    
+    public FaxDB getByUserFname(String username);
+    
+    List<FaxDB> getDataByExample(FaxDB faxDB);
 
 }
