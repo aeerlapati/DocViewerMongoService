@@ -1,12 +1,12 @@
 package com.mckesson.docviewermongoservice.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.mckesson.docviewermongoservice.model.FaxDB;
@@ -42,6 +42,18 @@ public class FaxServiceImpl implements FaxService {
 	@Override
 	public void delete(FaxDB faxDB) {
 		faxRepository.delete(faxDB);
+	}
+	
+	@Override
+	public List<FaxDB> getDataByExample(FaxDB faxDB) {
+		Example<FaxDB> faxExample = Example.of(faxDB);
+		return faxRepository.findAll(faxExample);
+	}
+	
+	@Override
+	public FaxDB getByUserFname(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
